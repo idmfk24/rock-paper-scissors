@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Rock, Paper, Scissors</h1>
+        <div class="choices">
+            <button class="move" id="rock">Rock</button>
+            <button class="move" id="paper">Paper</button>
+            <button class="move" id="scissors">Scissors</button>
+        </div>
+        <div class="result">
+            <p id="user-choice">Your move: </p>
+            <p id="computer-choice">AI's move: </p>
+            <p id="outcome"></p>
+        </div>
+    </div>
+
+    <script>
+        const moves = ["rock", "paper", "scissors"];
+        const possibleOutcomes = {
+            "rockscissors": "You win!",
+            "rockpaper": "You lose!",
+            "paperscissors": "You lose!",
+            "paperrock": "You win!",
+            "scissorspaper": "You win!",
+            "scissorsrock": "You lose!"
+        };
+
+        document.querySelectorAll('.move').forEach(button => {
+            button.addEventListener('click', function() {
+                const userChoice = this.id;
+                const computerChoice = moves[Math.floor(Math.random() * moves.length)];
+
+                document.getElementById('user-choice').textContent = `Your move: ${userChoice}`;
+                document.getElementById('computer-choice').textContent = `AI's move: ${computerChoice}`;
+
+                if (userChoice === computerChoice) {
+                    document.getElementById('outcome').textContent = "It's a stalemate...";
+                } else {
+                    const outcome = possibleOutcomes[userChoice + computerChoice];
+                    document.getElementById('outcome').textContent = outcome;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
